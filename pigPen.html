@@ -4,15 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pigs</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
     <main class="container">
-        <button id="add">ADD</button><br>
-        <button id="display">SHOW</button>
+        <table id="displayTable">
+            <thead>
+                <th>Name</th>
+                <th>Category</th>
+                <th></th>
+                <th></th>
+            </thead>
+            <tbody id="tableEntries"></tbody>
+        </table>
+        <button id="add">Add</button>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.47/system-csp-production.js" integrity="sha512-a9MEwZ/fjbukKadVs1ll0UUQj6eDrbIOosbrVlXtB0Xsyp8CS8WfltP03UxVzVmpYw+QhX1SphHlePMTVNVlPA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script type="text/javascript">
+    <script type="text/javascript" defer>
         System.defaultJSExtensions = true
         System.import('main')
     </script>

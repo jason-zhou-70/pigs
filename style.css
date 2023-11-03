@@ -1,0 +1,9 @@
+#displayTable {
+    border: 1px solid black;
+    border-collapse: collapse;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+th, tr, td {
+    border: 1px solid black;
+}

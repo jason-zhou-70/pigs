@@ -5,7 +5,7 @@ export class PigController implements PigServices {
     pigs: Pig[];
 
     constructor() {
-        this.pigs = [];
+        this.pigs = JSON.parse(localStorage.UserArray);
     }
 
     add(p: Pig) {
@@ -16,7 +16,8 @@ export class PigController implements PigServices {
     delete(id: number) {
         this.pigs = this.pigs.filter((p)=>{
             return p.id != id;
-        })
+        });
+        Pig.totalPigs--;
         localStorage.UserArray = JSON.stringify(this.pigs);
     }
 
@@ -24,6 +25,5 @@ export class PigController implements PigServices {
         //return this.pigs;
         return JSON.parse(localStorage.UserArray);
     }
-
 
 }
