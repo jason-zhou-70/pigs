@@ -31,18 +31,23 @@ System.register(["./pigController", "./greyPig", "./pigInterface"], function (ex
             let cell1 = row.insertCell(0);
             let cell2 = row.insertCell(1);
             let cell3 = row.insertCell(2);
-            let button = document.createElement("button");
-            button.className = "deleteButton";
-            button.innerText = "Delete";
-            button.addEventListener('click', function () {
-                controller.delete(pigs[i].id);
-                //console.log(pigs[i].id);
-                loadTable();
-            });
+            //let cell4: HTMLTableCellElement = row.insertCell(3);
+            let deleteButton = createDeleteButton(pigs[i]);
             cell1.innerText = pigs[i].name;
-            cell2.innerText = pigInterface_1.Breed[pigs[i].breed];
-            cell3.append(button);
+            cell2.innerText = pigInterface_1.Category[pigs[i].category];
+            cell3.append(deleteButton);
+            //cell4.innerText = Category[pigs[i].category];
         }
+    }
+    function createDeleteButton(p) {
+        let button = document.createElement("button");
+        button.className = "deleteButton";
+        button.innerText = "Delete";
+        button.addEventListener('click', function () {
+            controller.delete(p.id);
+            loadTable();
+        });
+        return button;
     }
     return {
         setters: [

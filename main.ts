@@ -1,7 +1,7 @@
 import { PigController } from './pigController'
 import { Pig } from './pig'
 import { GreyPig } from './greyPig'
-import { Breed } from './pigInterface';
+import { Breed, Category } from './pigInterface';
 
 var controller: PigController = new PigController();
 
@@ -40,16 +40,22 @@ function loadTableEntries(table: HTMLTableSectionElement, pigs: Pig[]): void {
         let cell1: HTMLTableCellElement = row.insertCell(0);
         let cell2: HTMLTableCellElement = row.insertCell(1);
         let cell3: HTMLTableCellElement = row.insertCell(2);
-        let button: HTMLButtonElement = <HTMLButtonElement> document.createElement("button");
+        //let cell4: HTMLTableCellElement = row.insertCell(3);
+        let deleteButton: HTMLButtonElement = createDeleteButton(pigs[i]);
+        cell1.innerText = pigs[i].name;
+        cell2.innerText = Category[pigs[i].category];
+        cell3.append(deleteButton);
+        //cell4.innerText = Category[pigs[i].category];
+    }
+}
+
+function createDeleteButton(p: Pig): HTMLButtonElement {
+    let button: HTMLButtonElement = <HTMLButtonElement> document.createElement("button");
         button.className = "deleteButton";
         button.innerText = "Delete";
         button.addEventListener('click', function(){
-            controller.delete(pigs[i].id);
-            //console.log(pigs[i].id);
+            controller.delete(p.id);
             loadTable();
         });
-        cell1.innerText = pigs[i].name;
-        cell2.innerText = Breed[pigs[i].breed];
-        cell3.append(button);
-    }
+    return button;
 }

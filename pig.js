@@ -6,13 +6,14 @@ System.register([], function (exports_1, context_1) {
         setters: [],
         execute: function () {
             Pig = class Pig {
-                constructor(name, breed, height, weight, personality) {
+                constructor(name, breed, height, weight, personality, category) {
                     this.id = Pig.idCount;
                     this.name = name;
                     this.breed = breed;
                     this.height = height;
                     this.weight = weight;
                     this.personality = personality;
+                    this.category = category;
                     Pig.totalPigs++;
                     Pig.idCount++;
                 }
