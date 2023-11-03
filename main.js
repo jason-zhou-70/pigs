@@ -14,19 +14,30 @@ System.register(["./pigController", "./greyPig", "./pigInterface"], function (ex
         });
     }
     function loadTable() {
-        var table = document.getElementById("displayTable");
+        var table = document.getElementById("tableEntries");
         var pigs = controller.showAll();
-        document.getElementById("tableEntries").remove();
+        clearTableEntries(table);
+        loadTableEntries(table, pigs);
+    }
+    function clearTableEntries(table) {
+        var rows = table.querySelectorAll("tr");
+        for (let i = 0; i < rows.length; i++) {
+            rows[i].remove();
+        }
+    }
+    function loadTableEntries(table, pigs) {
         for (let i = 0; i < pigs.length; i++) {
             let row = table.insertRow();
             let cell1 = row.insertCell(0);
             let cell2 = row.insertCell(1);
             let cell3 = row.insertCell(2);
             let button = document.createElement("button");
+            button.className = "deleteButton";
             button.innerText = "Delete";
             button.addEventListener('click', function () {
-                //controller.delete(pigs[i].id);
-                console.log(pigs[i].id);
+                controller.delete(pigs[i].id);
+                //console.log(pigs[i].id);
+                loadTable();
             });
             cell1.innerText = pigs[i].name;
             cell2.innerText = pigInterface_1.Breed[pigs[i].breed];
