@@ -7,20 +7,17 @@ System.register([], function (exports_1, context_1) {
         execute: function () {
             Pig = class Pig {
                 constructor(name, breed, height, weight, personality, category) {
-                    this.id = Pig.idCount;
+                    this.id = localStorage.idCount;
                     this.name = name;
                     this.breed = breed;
                     this.height = height;
                     this.weight = weight;
                     this.personality = personality;
                     this.category = category;
-                    Pig.totalPigs++;
-                    Pig.idCount++;
+                    localStorage.idCount++;
                 }
             };
             exports_1("Pig", Pig);
-            Pig.totalPigs = 0;
-            Pig.idCount = 0;
         }
     };
 });

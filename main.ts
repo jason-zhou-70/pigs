@@ -3,11 +3,18 @@ import { Pig } from './pig'
 import { GreyPig } from './greyPig'
 import { Breed, Category } from './pigInterface';
 
-var controller: PigController = new PigController();
+var controller: PigController;
+if (localStorage.idCount == null){
+    localStorage.idCount = 0;
+}
 
 function init(){
+    controller = new PigController();
     initializeListeners();
     loadTable();
+    if (localStorage.idCount == null){
+        localStorage.idCount = 0;
+    }
 }
 
 window.onload = init;

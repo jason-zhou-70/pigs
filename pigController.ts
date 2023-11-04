@@ -17,7 +17,6 @@ export class PigController implements PigServices {
         this.pigs = this.pigs.filter((p)=>{
             return p.id != id;
         });
-        Pig.totalPigs--;
         localStorage.UserArray = JSON.stringify(this.pigs);
     }
 

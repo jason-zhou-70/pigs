@@ -1,13 +1,9 @@
-System.register(["./pig"], function (exports_1, context_1) {
+System.register([], function (exports_1, context_1) {
     "use strict";
-    var pig_1, PigController;
+    var PigController;
     var __moduleName = context_1 && context_1.id;
     return {
-        setters: [
-            function (pig_1_1) {
-                pig_1 = pig_1_1;
-            }
-        ],
+        setters: [],
         execute: function () {
             PigController = class PigController {
                 constructor() {
@@ -21,7 +17,6 @@ System.register(["./pig"], function (exports_1, context_1) {
                     this.pigs = this.pigs.filter((p) => {
                         return p.id != id;
                     });
-                    pig_1.Pig.totalPigs--;
                     localStorage.UserArray = JSON.stringify(this.pigs);
                 }
                 showAll() {

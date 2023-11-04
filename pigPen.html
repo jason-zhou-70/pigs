@@ -19,12 +19,22 @@
         </table>
         <button id="add">Add</button>
     </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.47/system-csp-production.js" integrity="sha512-a9MEwZ/fjbukKadVs1ll0UUQj6eDrbIOosbrVlXtB0Xsyp8CS8WfltP03UxVzVmpYw+QhX1SphHlePMTVNVlPA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <section class="addMenu">
+        <header>Add New:</header>
+        <table id="addTable">
+            <tr><td>Name</td><td><input type="text" id="nameInput"></td></tr>
+            <tr><td>Height</td><td><input type="number" id="heightInput"></td></tr>
+            <tr><td>Weight</td><td><input type="number" id="weightInput"></td></tr>
+            <tr><td>Personality</td><td><input type="text" id="personalityInput"></td></tr>
+        </table>
+    </section>
 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.47/system-csp-production.js" integrity="sha512-a9MEwZ/fjbukKadVs1ll0UUQj6eDrbIOosbrVlXtB0Xsyp8CS8WfltP03UxVzVmpYw+QhX1SphHlePMTVNVlPA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript" defer>
         System.defaultJSExtensions = true
         System.import('main')
     </script>
-    
 </body>
 </html>

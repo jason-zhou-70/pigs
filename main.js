@@ -3,8 +3,12 @@ System.register(["./pigController", "./greyPig", "./pigInterface"], function (ex
     var pigController_1, greyPig_1, pigInterface_1, controller;
     var __moduleName = context_1 && context_1.id;
     function init() {
+        controller = new pigController_1.PigController();
         initializeListeners();
         loadTable();
+        if (localStorage.idCount == null) {
+            localStorage.idCount = 0;
+        }
     }
     function initializeListeners() {
         document.getElementById("add").addEventListener('click', function () {
@@ -62,7 +66,9 @@ System.register(["./pigController", "./greyPig", "./pigInterface"], function (ex
             }
         ],
         execute: function () {
-            controller = new pigController_1.PigController();
+            if (localStorage.idCount == null) {
+                localStorage.idCount = 0;
+            }
             window.onload = init;
         }
     };
