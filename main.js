@@ -74,7 +74,7 @@ System.register(["./pigController", "./greyPig", "./pigInterface"], function (ex
         const cell1 = row.insertCell(0);
         const cell2 = row.insertCell(1);
         const input = document.createElement("input");
-        input.id = "dynamicInput";
+        input.name = "dynamicInput";
         switch (option) {
             case 0: //Black
                 cell1.innerText = "Strength";
@@ -144,6 +144,12 @@ System.register(["./pigController", "./greyPig", "./pigInterface"], function (ex
     function handleSubmission(event) {
         event.preventDefault();
         const form = event.target;
+        const data = new FormData(form);
+        const name = data.get("nameInput").toString();
+        const height = parseInt(data.get("heightInput").toString());
+        const weight = parseInt(data.get("weightInput").toString());
+        const personality = data.get("personalityInput").toString();
+        //TODO: Add breeds for each category
     }
     return {
         setters: [

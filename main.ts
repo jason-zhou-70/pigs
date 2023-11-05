@@ -89,7 +89,7 @@ function addInputRow(option: number, table: HTMLTableElement): void{
     const cell1: HTMLTableCellElement = row.insertCell(0);
     const cell2: HTMLTableCellElement = row.insertCell(1);
     const input: HTMLInputElement = document.createElement("input");
-    input.id = "dynamicInput"
+    input.name = "dynamicInput"
     switch (option){
         case 0: //Black
             cell1.innerText = "Strength";
@@ -162,22 +162,11 @@ function handleSubmission(event: Event): void {
     event.preventDefault();
 
     const form: HTMLFormElement = event.target as HTMLFormElement;
+    const data: FormData = new FormData(form);
     
+    const name: string = data.get("nameInput")!.toString() as string;
+    const height: number = parseInt(data.get("heightInput")!.toString()) as number;
+    const weight: number = parseInt(data.get("weightInput")!.toString()) as number;
+    const personality: string = data.get("personalityInput")!.toString() as string;
+    //TODO: Add breeds for each category
 }
-
-// const category = document.getElementById("categorySelect") as HTMLSelectElement;
-// const tableBody = document.getElementById("tableBody") as HTMLTableSectionElement;
-// const categoryData = whatever your data is
-
-// const updateTable = () => {
-//         const selectedCategory = categorySelect.value;
-//         const pigs = categoryData[selectedCategory] || [];
-
-//         for (const pig of pigs) {
-//             const row = document.createElement("tr");
-//             row.innerHTML = <td>${pig.data}</td><td>${pig.otherData}</td>;
-//             tableBody.appendChild(row);
-//         }
-//     };
-
-// categorySelect.addEventListener("change", updateTable);
