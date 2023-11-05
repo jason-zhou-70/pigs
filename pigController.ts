@@ -21,7 +21,6 @@ export class PigController implements PigServices {
     }
 
     showAll(): Pig[] {
-        //return this.pigs;
         return JSON.parse(localStorage.UserArray);
     }
 

@@ -21,12 +21,24 @@
     </main>
     <section class="addMenu">
         <header>Add New:</header>
-        <table id="addTable">
-            <tr><td>Name</td><td><input type="text" id="nameInput"></td></tr>
-            <tr><td>Height</td><td><input type="number" id="heightInput"></td></tr>
-            <tr><td>Weight</td><td><input type="number" id="weightInput"></td></tr>
-            <tr><td>Personality</td><td><input type="text" id="personalityInput"></td></tr>
-        </table>
+        <form id="inputForm">
+            <table id="addTable">
+                <tr><td>Name</td><td><input type="text" id="nameInput" required></td></tr>
+                <tr><td>Height</td><td><input type="number" id="heightInput" required></td></tr>
+                <tr><td>Weight</td><td><input type="number" id="weightInput" required></td></tr>
+                <tr><td>Personality</td><td><input type="text" id="personalityInput" required></td></tr>
+                <tr><td>Category</td>
+                    <td><select id="categoryInput" required>
+                        <option value="" disabled selected hidden>Choose one</option>
+                        <option value="0">Black</option>
+                        <option value="1">White</option>
+                        <option value="2">Chestnut</option>
+                        <option value="3">Grey</option>
+                    </select></td>
+                </tr>
+            </table>
+            <input type="submit">
+        </form>
     </section>
 
 

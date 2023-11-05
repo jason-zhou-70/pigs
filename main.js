@@ -3,48 +3,55 @@ System.register(["./pigController", "./greyPig", "./pigInterface"], function (ex
     var pigController_1, greyPig_1, pigInterface_1, controller;
     var __moduleName = context_1 && context_1.id;
     function init() {
-        controller = new pigController_1.PigController();
-        initializeListeners();
-        loadTable();
         if (localStorage.idCount == null) {
             localStorage.idCount = 0;
         }
+        if (localStorage.UserArray == null) {
+            localStorage.UserArray = JSON.stringify([]);
+        }
+        initializeListeners();
+        loadTable();
     }
     function initializeListeners() {
         document.getElementById("add").addEventListener('click', function () {
-            var pig = new greyPig_1.GreyPig("Pork Chop", pigInterface_1.Breed.Potbelly, 10, 20, "Fair", 50);
+            const pig = new greyPig_1.GreyPig("Pork Chop", pigInterface_1.Breed.Potbelly, 10, 20, "Fair", 50);
             controller.add(pig);
             loadTable();
         });
+        document.getElementById("categoryInput").addEventListener("change", function () {
+            const selectedOption = this;
+            updateForm(parseInt(selectedOption.value));
+        });
+        document.getElementById("inputForm").addEventListener("submit", handleSubmission);
     }
     function loadTable() {
-        var table = document.getElementById("tableEntries");
-        var pigs = controller.showAll();
+        const table = document.getElementById("tableEntries");
+        const pigs = controller.showAll();
         clearTableEntries(table);
         loadTableEntries(table, pigs);
     }
     function clearTableEntries(table) {
-        var rows = table.querySelectorAll("tr");
-        for (let i = 0; i < rows.length; i++) {
-            rows[i].remove();
+        const rows = table.querySelectorAll("tr");
+        for (let row of rows) {
+            row.remove();
         }
     }
     function loadTableEntries(table, pigs) {
-        for (let i = 0; i < pigs.length; i++) {
-            let row = table.insertRow();
-            let cell1 = row.insertCell(0);
-            let cell2 = row.insertCell(1);
-            let cell3 = row.insertCell(2);
+        for (let pig of pigs) {
+            const row = table.insertRow();
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            const cell3 = row.insertCell(2);
             //let cell4: HTMLTableCellElement = row.insertCell(3);
-            let deleteButton = createDeleteButton(pigs[i]);
-            cell1.innerText = pigs[i].name;
-            cell2.innerText = pigInterface_1.Category[pigs[i].category];
+            const deleteButton = createDeleteButton(pig);
+            cell1.innerText = pig.name;
+            cell2.innerText = pigInterface_1.Category[pig.category];
             cell3.append(deleteButton);
             //cell4.innerText = Category[pigs[i].category];
         }
     }
     function createDeleteButton(p) {
-        let button = document.createElement("button");
+        const button = document.createElement("button");
         button.className = "deleteButton";
         button.innerText = "Delete";
         button.addEventListener('click', function () {
@@ -52,6 +59,91 @@ System.register(["./pigController", "./greyPig", "./pigInterface"], function (ex
             loadTable();
         });
         return button;
+    }
+    function updateForm(option) {
+        const table = document.getElementById("addTable");
+        if (table.rows.length < 6) {
+            addInputRow(option, table);
+        }
+        else {
+            updateInputRow(option, table);
+        }
+    }
+    function addInputRow(option, table) {
+        const row = table.insertRow();
+        const cell1 = row.insertCell(0);
+        const cell2 = row.insertCell(1);
+        const input = document.createElement("input");
+        input.id = "dynamicInput";
+        switch (option) {
+            case 0: //Black
+                cell1.innerText = "Strength";
+                input.type = "number";
+                input.min = "1";
+                input.max = "10";
+                input.required = true;
+                cell2.appendChild(input);
+                break;
+            case 1: //White
+                cell1.innerText = "Running";
+                input.type = "number";
+                input.min = "0";
+                input.max = "100";
+                input.required = true;
+                cell2.appendChild(input);
+                break;
+            case 2: //Chestnut
+                cell1.innerText = "Language";
+                input.type = "text";
+                input.required = true;
+                cell2.appendChild(input);
+                break;
+            case 3: //Grey
+                cell1.innerText = "Swimming";
+                input.type = "number";
+                input.min = "0";
+                input.max = "100";
+                input.required = true;
+                cell2.appendChild(input);
+                break;
+        }
+    }
+    function updateInputRow(option, table) {
+        const cell1 = table.rows[5].cells[0];
+        const cell2 = table.rows[5].cells[1];
+        const input = cell2.childNodes[0];
+        switch (option) {
+            case 0: //Black
+                cell1.innerText = "Strength";
+                input.type = "number";
+                input.min = "1";
+                input.max = "10";
+                input.required = true;
+                break;
+            case 1: //White
+                cell1.innerText = "Running";
+                input.type = "number";
+                input.min = "0";
+                input.max = "100";
+                input.required = true;
+                break;
+            case 2: //Chestnut
+                cell1.innerText = "Language";
+                input.type = "text";
+                input.required = true;
+                break;
+            case 3: //Grey
+                cell1.innerText = "Swimming";
+                input.type = "number";
+                input.min = "0";
+                input.max = "100";
+                input.required = true;
+                break;
+        }
+    }
+    function handleSubmission(event) {
+        event.preventDefault();
+        const form = event.target;
     }
     return {
         setters: [
@@ -66,6 +158,7 @@ System.register(["./pigController", "./greyPig", "./pigInterface"], function (ex
             }
         ],
         execute: function () {
+            controller = new pigController_1.PigController();
             if (localStorage.idCount == null) {
                 localStorage.idCount = 0;
             }

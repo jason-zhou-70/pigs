@@ -20,7 +20,6 @@ System.register([], function (exports_1, context_1) {
                     localStorage.UserArray = JSON.stringify(this.pigs);
                 }
                 showAll() {
-                    //return this.pigs;
                     return JSON.parse(localStorage.UserArray);
                 }
             };
