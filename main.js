@@ -214,6 +214,7 @@ System.register(["./pigController", "./greyPig", "./pigInterface", "./blackPig",
                 input.type = "number";
                 input.min = "1";
                 input.max = "10";
+                input.value = "";
                 input.required = true;
                 select.options[1].innerText = "Berkshire";
                 select.options[1].value = "0";
@@ -227,6 +228,7 @@ System.register(["./pigController", "./greyPig", "./pigInterface", "./blackPig",
                 input.type = "number";
                 input.min = "0";
                 input.max = "100";
+                input.value = "";
                 input.required = true;
                 select.options[1].innerText = "Yorkshire";
                 select.options[1].value = "3";
@@ -238,6 +240,7 @@ System.register(["./pigController", "./greyPig", "./pigInterface", "./blackPig",
             case 2: //Chestnut
                 cell1.innerText = "Language";
                 input.type = "text";
+                input.value = "";
                 input.required = true;
                 select.options[1].innerText = "Tamworth";
                 select.options[1].value = "6";
@@ -251,6 +254,7 @@ System.register(["./pigController", "./greyPig", "./pigInterface", "./blackPig",
                 input.type = "number";
                 input.min = "0";
                 input.max = "100";
+                input.value = "";
                 input.required = true;
                 select.options[1].innerText = "Meishan";
                 select.options[1].value = "9";

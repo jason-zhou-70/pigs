@@ -20,7 +20,19 @@ System.register([], function (exports_1, context_1) {
                     localStorage.UserArray = JSON.stringify(this.pigs);
                 }
                 showAll() {
-                    return JSON.parse(localStorage.UserArray);
+                    this.pigs = JSON.parse(localStorage.UserArray);
+                    this.sortPigs();
+                    return this.pigs;
+                }
+                sortPigs() {
+                    const comparator = (pig1, pig2) => {
+                        const compareCategory = pig1.category.toString().localeCompare(pig2.category.toString());
+                        if (compareCategory === 0) {
+                            return pig1.name.localeCompare(pig2.name);
+                        }
+                        return compareCategory;
+                    };
+                    this.pigs.sort(comparator);
                 }
             };
             exports_1("PigController", PigController);

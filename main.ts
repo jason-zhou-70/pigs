@@ -242,6 +242,7 @@ function updateInputRow(option: number, table: HTMLTableElement): void {
             input.type = "number";
             input.min = "1";
             input.max = "10";
+            input.value = "";
             input.required = true;
 
             select.options[1].innerText = "Berkshire";
@@ -256,6 +257,7 @@ function updateInputRow(option: number, table: HTMLTableElement): void {
             input.type = "number";
             input.min = "0";
             input.max = "100";
+            input.value = "";
             input.required = true;
 
             select.options[1].innerText = "Yorkshire";
@@ -268,6 +270,7 @@ function updateInputRow(option: number, table: HTMLTableElement): void {
         case 2: //Chestnut
             cell1.innerText = "Language";
             input.type = "text";
+            input.value = "";
             input.required = true;
 
             select.options[1].innerText = "Tamworth";
@@ -282,6 +285,7 @@ function updateInputRow(option: number, table: HTMLTableElement): void {
             input.type = "number";
             input.min = "0";
             input.max = "100";
+            input.value = "";
             input.required = true;
 
             select.options[1].innerText = "Meishan";

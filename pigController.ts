@@ -21,7 +21,19 @@ export class PigController implements PigServices {
     }
 
     showAll(): Pig[] {
-        return JSON.parse(localStorage.UserArray);
+        this.pigs = JSON.parse(localStorage.UserArray);
+        this.sortPigs();
+        return this.pigs;
     }
 
+    sortPigs(): void {
+        const comparator = (pig1: Pig, pig2: Pig): number => {
+            const compareCategory = pig1.category.toString().localeCompare(pig2.category.toString());
+            if (compareCategory === 0){
+                return pig1.name.localeCompare(pig2.name);
+            }
+            return compareCategory;
+        }
+        this.pigs.sort(comparator);
+    }
 }
