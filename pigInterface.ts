@@ -1,5 +1,20 @@
 export enum Breed {
-    Potbelly
+    //Black
+    Berkshire,
+    Hampshire,
+    LargeBlack,
+    //White
+    Yorkshire,
+    Landrace,
+    ChesterWhite,
+    //Chestnut
+    Tamworth,
+    RedWattle,
+    Hereford,
+    //Grey
+    Meishan,
+    Lacombe,
+    Minzhu
 }
 
 export enum Category {
@@ -16,5 +31,9 @@ export interface PigInterface {
     height: number;
     weight: number;
     personality: string;
+    strengthScore?: number;
+    swimScore?: number;
+    language?: string;
+    runScore?: number;
 }
 

@@ -2,6 +2,9 @@ import { PigController } from './pigController'
 import { Pig } from './pig'
 import { GreyPig } from './greyPig'
 import { Breed, Category } from './pigInterface';
+import { BlackPig } from './blackPig';
+import { WhitePig } from './whitePig';
+import { ChestnutPig } from './chestnutPig';
 
 const controller: PigController = new PigController();
 if (localStorage.idCount == null){
@@ -23,15 +26,22 @@ window.onload = init;
 
 function initializeListeners(): void{
     document.getElementById("add")!.addEventListener('click', function(){
-        const pig: Pig = new GreyPig("Pork Chop", Breed.Potbelly, 10, 20, "Fair", 50);
-        controller.add(pig);
-        loadTable();
+        displayAddMenu();
     })
     document.getElementById("categoryInput")!.addEventListener("change", function(){
         const selectedOption: HTMLSelectElement = this as HTMLSelectElement;
         updateForm(parseInt(selectedOption.value));
     })
     document.getElementById("inputForm")!.addEventListener("submit", handleSubmission);
+}
+
+function displayAddMenu(): void {
+    const addMenu: HTMLElement = document.getElementById("addMenu") as HTMLElement;
+    const infoMenu: HTMLElement = document.getElementById("infoMenu") as HTMLElement;
+    if (infoMenu.style.display == "block"){
+        infoMenu.style.display = "none";
+    }
+    addMenu.style.display = "block";
 }
 
 function loadTable(){
@@ -50,16 +60,17 @@ function clearTableEntries(table: HTMLTableSectionElement): void {
 
 function loadTableEntries(table: HTMLTableSectionElement, pigs: Pig[]): void {
     for (let pig of pigs){
-        const row: HTMLTableRowElement = table.insertRow();
-        const cell1: HTMLTableCellElement = row.insertCell(0);
-        const cell2: HTMLTableCellElement = row.insertCell(1);
-        const cell3: HTMLTableCellElement = row.insertCell(2);
-        //let cell4: HTMLTableCellElement = row.insertCell(3);
-        const deleteButton: HTMLButtonElement = createDeleteButton(pig);
+        const row: HTMLTableRowElement = table.insertRow() as HTMLTableRowElement;
+        const cell1: HTMLTableCellElement = row.insertCell(0) as HTMLTableCellElement;
+        const cell2: HTMLTableCellElement = row.insertCell(1) as HTMLTableCellElement;
+        const cell3: HTMLTableCellElement = row.insertCell(2) as HTMLTableCellElement;
+        const cell4: HTMLTableCellElement = row.insertCell(3) as HTMLTableCellElement;
+        const deleteButton: HTMLButtonElement = createDeleteButton(pig) as HTMLButtonElement;
+        const infoButton: HTMLButtonElement = createInfoButton(pig) as HTMLButtonElement;
         cell1.innerText = pig.name;
         cell2.innerText = Category[pig.category];
-        cell3.append(deleteButton);
-        //cell4.innerText = Category[pigs[i].category];
+        cell3.append(infoButton);
+        cell4.append(deleteButton);
     }
 }
 
@@ -69,9 +80,50 @@ function createDeleteButton(p: Pig): HTMLButtonElement {
         button.innerText = "Delete";
         button.addEventListener('click', function(){
             controller.delete(p.id);
+            document.getElementById("infoMenu")!.style.display = "none";
             loadTable();
         });
     return button;
+}
+
+function createInfoButton(p: Pig): HTMLButtonElement {
+    const button: HTMLButtonElement = document.createElement("button") as HTMLButtonElement;
+    button.innerText = "More Info";
+    button.addEventListener('click', function(){
+        loadInfo(p);
+    });
+    return button;
+}
+
+function loadInfo(p: Pig): void {
+    const table: HTMLTableElement = document.getElementById("infoTable") as HTMLTableElement;
+    table.rows[0].cells[1].innerText = p.name;
+    table.rows[1].cells[1].innerText = Breed[p.breed];
+    table.rows[2].cells[1].innerText = p.height.toString() + "hocks";
+    table.rows[3].cells[1].innerText = p.weight.toString() + "stones";
+    table.rows[5].cells[1].innerText = p.personality;
+    switch(p.category){
+        case Category.Black:
+            table.rows[4].cells[0].innerText = "Strength";
+            table.rows[4].cells[1].innerText = p.strengthScore!.toString();
+            break;
+        case Category.White:
+            table.rows[4].cells[0].innerText = "Running";
+            table.rows[4].cells[1].innerText = p.runScore!.toString();
+            break;
+        case Category.Chestnut:
+            table.rows[4].cells[0].innerText = "Language";
+            table.rows[4].cells[1].innerText = p.language as string;
+            break;
+        case Category.Grey:
+            table.rows[4].cells[0].innerText = "Swimming";
+            table.rows[4].cells[1].innerText = p.swimScore!.toString();
+            break;
+    }
+    if (document.getElementById("addMenu")!.style.display == "block"){
+        document.getElementById("addMenu")!.style.display = "none";
+    }
+    document.getElementById("infoMenu")!.style.display = "block";
 }
 
 function updateForm(option: number): void {
@@ -85,11 +137,30 @@ function updateForm(option: number): void {
 }
 
 function addInputRow(option: number, table: HTMLTableElement): void{
-    const row: HTMLTableRowElement = table.insertRow();
-    const cell1: HTMLTableCellElement = row.insertCell(0);
-    const cell2: HTMLTableCellElement = row.insertCell(1);
-    const input: HTMLInputElement = document.createElement("input");
-    input.name = "dynamicInput"
+    const row1: HTMLTableRowElement = table.insertRow() as HTMLTableRowElement;
+    const cell1: HTMLTableCellElement = row1.insertCell(0) as HTMLTableCellElement;
+    const cell2: HTMLTableCellElement = row1.insertCell(1) as HTMLTableCellElement;
+    const input: HTMLInputElement = document.createElement("input") as HTMLInputElement;
+    input.name = "dynamicInput";
+
+    const row2: HTMLTableRowElement = table.insertRow() as HTMLTableRowElement;
+    const cell3: HTMLTableCellElement = row2.insertCell(0) as HTMLTableCellElement;
+    const cell4: HTMLTableCellElement = row2.insertCell(1) as HTMLTableCellElement;
+    cell3.innerHTML = "Breed";
+    const select: HTMLSelectElement = document.createElement("select") as HTMLSelectElement;
+    const option1: HTMLOptionElement = document.createElement("option");
+    const option2: HTMLOptionElement = document.createElement("option");
+    const option3: HTMLOptionElement = document.createElement("option");
+    const hiddenOption: HTMLOptionElement = document.createElement("option");
+    hiddenOption.disabled = true;
+    hiddenOption.selected = true;
+    hiddenOption.hidden = true;
+    select.add(hiddenOption);
+    select.add(option1);
+    select.add(option2);
+    select.add(option3);
+    select.id = "breedInput";
+    select.required = true;
     switch (option){
         case 0: //Black
             cell1.innerText = "Strength";
@@ -98,6 +169,14 @@ function addInputRow(option: number, table: HTMLTableElement): void{
             input.max = "10";
             input.required = true;
             cell2.appendChild(input);
+
+            option1.innerText = "Berkshire";
+            option1.value = "0";
+            option2.innerText = "Hampshire";
+            option2.value = "1";
+            option3.innerText = "Large Black";
+            option3.value = "2";
+            cell4.appendChild(select);
             break;
         case 1: //White
             cell1.innerText = "Running";
@@ -106,12 +185,28 @@ function addInputRow(option: number, table: HTMLTableElement): void{
             input.max = "100";
             input.required = true;
             cell2.appendChild(input);
+
+            option1.innerText = "Yorkshire";
+            option1.value = "3";
+            option2.innerText = "Landrace";
+            option2.value = "4";
+            option3.innerText = "Chester White";
+            option3.value = "5";
+            cell4.appendChild(select);
             break;
         case 2: //Chestnut
             cell1.innerText = "Language";
             input.type = "text";
             input.required = true;
             cell2.appendChild(input);
+
+            option1.innerText = "Tamworth";
+            option1.value = "6";
+            option2.innerText = "Red Wattle";
+            option2.value = "7";
+            option3.innerText = "Hereford";
+            option3.value = "8";
+            cell4.appendChild(select);
             break;
         case 3: //Grey
             cell1.innerText = "Swimming";
@@ -120,6 +215,14 @@ function addInputRow(option: number, table: HTMLTableElement): void{
             input.max = "100";
             input.required = true;
             cell2.appendChild(input);
+
+            option1.innerText = "Meishan";
+            option1.value = "9";
+            option2.innerText = "Lacombe";
+            option2.value = "10";
+            option3.innerText = "Minzhu";
+            option3.value = "11";
+            cell4.appendChild(select);
             break;
     }
 }
@@ -168,5 +271,54 @@ function handleSubmission(event: Event): void {
     const height: number = parseInt(data.get("heightInput")!.toString()) as number;
     const weight: number = parseInt(data.get("weightInput")!.toString()) as number;
     const personality: string = data.get("personalityInput")!.toString() as string;
-    //TODO: Add breeds for each category
+
+    const category: HTMLSelectElement = document.getElementById("categoryInput") as HTMLSelectElement;
+    const dynamicType: number = parseInt(category.value) as number;
+    let dynamicInput: string | number;
+    if (dynamicType == Category.Chestnut){
+        dynamicInput = data.get("dynamicInput")!.toString() as string;
+    }
+    else{
+        dynamicInput = parseInt(data.get("dynamicInput")!.toString()) as number;
+    }
+
+    const breedInput: HTMLSelectElement = document.getElementById("breedInput") as HTMLSelectElement;
+    const breed: Breed = parseInt(breedInput.value) as Breed;
+
+    let newPig: Pig;
+    switch (breed){
+        case Breed.Berkshire: case Breed.Hampshire: case Breed.LargeBlack:
+            const strength: number = dynamicInput as number;
+            newPig = new BlackPig(name, breed, height, weight, personality, strength);
+            controller.add(newPig);
+            loadTable();
+            break;
+        case Breed.Yorkshire: case Breed.Landrace: case Breed.ChesterWhite:
+            const run: number = dynamicInput as number;
+            newPig = new WhitePig(name, breed, height, weight, personality, run);
+            controller.add(newPig);
+            loadTable();
+            break;
+        case Breed.Tamworth: case Breed.RedWattle: case Breed.Hereford:
+            const language: string = dynamicInput as string;
+            newPig = new ChestnutPig(name, breed, height, weight, personality, language);
+            controller.add(newPig);
+            loadTable();
+            break;
+        case Breed.Meishan: case Breed.Lacombe: case Breed.Minzhu:
+            const swim: number = dynamicInput as number;
+            newPig = new GreyPig(name, breed, height, weight, personality, swim);
+            controller.add(newPig);
+            loadTable();
+            break;
+    }
+    resetForm(form);
+    document.getElementById("addMenu")!.style.display = "none";
+}
+
+function resetForm(form: HTMLFormElement): void{
+    const table: HTMLTableElement = document.getElementById("addTable") as HTMLTableElement;
+    table.deleteRow(6);
+    table.deleteRow(5);
+    form.reset();
 }

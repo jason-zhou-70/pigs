@@ -8,6 +8,10 @@ export abstract class Pig implements PigInterface {
     weight: number;
     personality: string;
     category: Category;
+    strengthScore?: number;
+    swimScore?: number;
+    language?: string;
+    runScore?: number;
 
     constructor(name: string, breed: Breed, height: number, weight: number, personality: string, category: Category){
         this.id = localStorage.idCount;

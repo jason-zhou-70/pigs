@@ -6,7 +6,22 @@ System.register([], function (exports_1, context_1) {
         setters: [],
         execute: function () {
             (function (Breed) {
-                Breed[Breed["Potbelly"] = 0] = "Potbelly";
+                //Black
+                Breed[Breed["Berkshire"] = 0] = "Berkshire";
+                Breed[Breed["Hampshire"] = 1] = "Hampshire";
+                Breed[Breed["LargeBlack"] = 2] = "LargeBlack";
+                //White
+                Breed[Breed["Yorkshire"] = 3] = "Yorkshire";
+                Breed[Breed["Landrace"] = 4] = "Landrace";
+                Breed[Breed["ChesterWhite"] = 5] = "ChesterWhite";
+                //Chestnut
+                Breed[Breed["Tamworth"] = 6] = "Tamworth";
+                Breed[Breed["RedWattle"] = 7] = "RedWattle";
+                Breed[Breed["Hereford"] = 8] = "Hereford";
+                //Grey
+                Breed[Breed["Meishan"] = 9] = "Meishan";
+                Breed[Breed["Lacombe"] = 10] = "Lacombe";
+                Breed[Breed["Minzhu"] = 11] = "Minzhu";
             })(Breed || (exports_1("Breed", Breed = {})));
             (function (Category) {
                 Category[Category["Black"] = 0] = "Black";

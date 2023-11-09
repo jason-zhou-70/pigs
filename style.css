@@ -1,3 +1,8 @@
+body {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 #displayTable {
     border: 1px solid black;
     border-collapse: collapse;
@@ -17,18 +22,24 @@ th {
     color: white;
 }
 
-#addTable {
+#addTable, #infoTable {
     border-collapse: collapse;
     border: 1px solid black;
 }
 
+#addMenu, #infoMenu {
+    border: 1px solid black;
+    display: none;
+}
+
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    /* display: none; <- Crashes Chrome on hover */
+    /* display: none; */
     -webkit-appearance: none;
-    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    margin: 0;
 }
 
 input[type=number] {
-    -moz-appearance:textfield; /* Firefox */
+    -moz-appearance:textfield;
 }
