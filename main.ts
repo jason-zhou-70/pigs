@@ -142,6 +142,7 @@ function addInputRow(option: number, table: HTMLTableElement): void{
     const cell2: HTMLTableCellElement = row1.insertCell(1) as HTMLTableCellElement;
     const input: HTMLInputElement = document.createElement("input") as HTMLInputElement;
     input.name = "dynamicInput";
+    input.autocomplete = "off";
 
     const row2: HTMLTableRowElement = table.insertRow() as HTMLTableRowElement;
     const cell3: HTMLTableCellElement = row2.insertCell(0) as HTMLTableCellElement;
@@ -231,6 +232,10 @@ function updateInputRow(option: number, table: HTMLTableElement): void {
     const cell1: HTMLTableCellElement = table.rows[5].cells[0];
     const cell2: HTMLTableCellElement = table.rows[5].cells[1];
     const input: HTMLInputElement = cell2.childNodes[0] as HTMLInputElement;
+
+    const cell4: HTMLTableCellElement = table.rows[6].cells[1];
+    const select: HTMLSelectElement = cell4.childNodes[0] as HTMLSelectElement;
+    select.options[0].selected = true;
     switch (option){
         case 0: //Black
             cell1.innerText = "Strength";
@@ -238,6 +243,13 @@ function updateInputRow(option: number, table: HTMLTableElement): void {
             input.min = "1";
             input.max = "10";
             input.required = true;
+
+            select.options[1].innerText = "Berkshire";
+            select.options[1].value = "0";
+            select.options[2].innerText = "Hampshire";
+            select.options[2].value = "1";
+            select.options[3].innerText = "Large Black";
+            select.options[3].value = "2";
             break;
         case 1: //White
             cell1.innerText = "Running";
@@ -245,11 +257,25 @@ function updateInputRow(option: number, table: HTMLTableElement): void {
             input.min = "0";
             input.max = "100";
             input.required = true;
+
+            select.options[1].innerText = "Yorkshire";
+            select.options[1].value = "3";
+            select.options[2].innerText = "Landrace";
+            select.options[2].value = "4";
+            select.options[3].innerText = "Chester White";
+            select.options[3].value = "5";
             break;
         case 2: //Chestnut
             cell1.innerText = "Language";
             input.type = "text";
             input.required = true;
+
+            select.options[1].innerText = "Tamworth";
+            select.options[1].value = "6";
+            select.options[2].innerText = "Red Wattle";
+            select.options[2].value = "7";
+            select.options[3].innerText = "Hereford";
+            select.options[3].value = "8";
             break;
         case 3: //Grey
             cell1.innerText = "Swimming";
@@ -257,6 +283,13 @@ function updateInputRow(option: number, table: HTMLTableElement): void {
             input.min = "0";
             input.max = "100";
             input.required = true;
+
+            select.options[1].innerText = "Meishan";
+            select.options[1].value = "9";
+            select.options[2].innerText = "Lacombe";
+            select.options[2].value = "10";
+            select.options[3].innerText = "Minzhu";
+            select.options[3].value = "11";
             break;
     }
 }
