@@ -12,12 +12,6 @@ if (localStorage.idCount == null){
 }
 
 function init(){
-    if (localStorage.idCount == null){
-        localStorage.idCount = 0;
-    }
-    if (localStorage.UserArray == null){
-        localStorage.UserArray = JSON.stringify([]);
-    }
     initializeListeners();
     loadTable();
 }

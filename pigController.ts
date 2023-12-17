@@ -5,6 +5,12 @@ export class PigController implements PigServices {
     pigs: Pig[];
 
     constructor() {
+        if (Number.isNaN(localStorage.idCount)){
+            localStorage.idCount = 0;
+        }
+        if (localStorage.UserArray == null){
+            localStorage.UserArray = JSON.stringify([]);
+        }
         this.pigs = JSON.parse(localStorage.UserArray);
     }
 

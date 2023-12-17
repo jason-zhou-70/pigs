@@ -7,6 +7,12 @@ System.register([], function (exports_1, context_1) {
         execute: function () {
             PigController = class PigController {
                 constructor() {
+                    if (Number.isNaN(localStorage.idCount)) {
+                        localStorage.idCount = 0;
+                    }
+                    if (localStorage.UserArray == null) {
+                        localStorage.UserArray = JSON.stringify([]);
+                    }
                     this.pigs = JSON.parse(localStorage.UserArray);
                 }
                 add(p) {

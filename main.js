@@ -3,12 +3,6 @@ System.register(["./pigController", "./greyPig", "./pigInterface", "./blackPig",
     var pigController_1, greyPig_1, pigInterface_1, blackPig_1, whitePig_1, chestnutPig_1, controller;
     var __moduleName = context_1 && context_1.id;
     function init() {
-        if (localStorage.idCount == null) {
-            localStorage.idCount = 0;
-        }
-        if (localStorage.UserArray == null) {
-            localStorage.UserArray = JSON.stringify([]);
-        }
         initializeListeners();
         loadTable();
     }
